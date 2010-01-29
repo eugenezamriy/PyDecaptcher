@@ -73,11 +73,25 @@ class Decaptcher:
 
     __text_OFFSET = 20
 
-    def __init__(self, login, password, address=None, port=None, timeout=None):
-        self.__login = login
+    def __init__(self, login, password, address, port, timeout=None):
+        """
+        @type login: str
+        @param login: Service login.
+        @type password: str
+        @param password: Service password.
+        @type address: str
+        @param address: Service IP address.
+        @type port: int
+        @param port: Service port.
+        @type timeout: Socket timeout in seconds.
+        """
+        self.__login = str(login)
         self.__password = password
         self.__address = address
-        self.__port = port
+        try:
+            self.__port = int(port)
+        except:
+            raise ValueError("invalid port value")
         self.__timeout = timeout
         self.__socket = None
 
